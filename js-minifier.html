@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="src/style.css">
+  <title>Vite + TS</title>
+</head>
+
+<body>
+  <div id="app">
+    <h1>JavaScript Minifier</h1>
+    <label for="txtInputCode">Input JavaScript Code:</label>
+    <textarea class="code" id="txtInputCode" placeholder="Enter your JavaScript code here..."
+      spellcheck="false"></textarea>
+
+    <button id="btnMinify">Minify Code</button>
+
+    <label for="txtOutputCode">Minified JavaScript Code:</label>
+    <textarea class="code" id="txtOutputCode" readonly placeholder="Minified code will appear here..."
+      spellcheck="false"></textarea>
+
+    <!-- Include Terser using Skypack -->
+    <script type="module">
+      import { minify } from 'https://cdn.skypack.dev/terser';
+
+      const doMinify = () => {
+        setTimeout(async _ => {
+          try {
+            const txtInputCode = document.getElementById('txtInputCode');
+            const txtOutputCode = document.getElementById('txtOutputCode');
+            txtOutputCode.value = 'loading...';
+            const result = await minify(txtInputCode.value);
+            if (result.code) {
+              txtOutputCode.value = result.code;
+              txtOutputCode.classList.remove('error');
+            } else {
+              throw new Error(`Error: Unable to minify code.`);
+            }
+          } catch (error) {
+            const txtOutputCode = document.getElementById('txtOutputCode');
+            txtOutputCode.value = `Error: ${error}`;
+            txtOutputCode.classList.add('error');
+            throw error;
+          }
+        }, 0);
+      };
+      document.getElementById('btnMinify').addEventListener('click', doMinify);
+      document.getElementById('txtInputCode').addEventListener('keyup', e => {
+        if (e.isTrusted === false) return;
+        if (e.ctrlKey) {
+          if (e.code === 'Enter') {
+            doMinify();
+          }
+        }
+      });
+      document.getElementById('txtInputCode').addEventListener('paste', doMinify);
+      document.getElementById('txtInputCode').addEventListener('change', doMinify);
+
+      document.getElementById('txtOutputCode').addEventListener('focus', e => {
+        e.target.select();
+      });
+    </script>
+  </div>
+</body>
+
+</html>
