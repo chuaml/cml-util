@@ -1,8 +1,23 @@
 {
   "name": "cml-util",
+  "version": "0.0.1",
   "private": true,
-  "version": "0.0.0",
+  "description": "custom web utilities and tools",
+  "keywords": [
+    "cml"
+  ],
+  "homepage": "https://github.com/chuaml/cml-util#readme",
+  "bugs": {
+    "url": "https://github.com/chuaml/cml-util/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chuaml/cml-util.git"
+  },
+  "license": "Apache License Version 2.0",
+  "author": "chuaml",
   "type": "module",
+  "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
