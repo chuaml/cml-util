@@ -135,3 +135,55 @@ textarea:read-only {
   outline: red;
   color: #ff9c9c;
 }
+
+#txtOutputCode{
+  cursor: pointer;
+}
+
+
+:root {
+    font-size: 16px;
+    line-height: 1.5;
+    scroll-padding-top: 15svh;
+}
+
+
+button,
+select,
+input[type=radio],
+input[type=checkbox],
+input[type=file],
+label:has(>input) {
+    cursor: pointer;
+
+    &:active {
+        box-shadow: 0 0 4px 0;
+    }
+
+    &[readonly],
+    &:disabled {
+        cursor: not-allowed;
+    }
+}
+
+input[type=checkbox] {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: middle;
+    margin: 0;
+    margin-bottom: .1rem;
+}
+
+input[autocomplete="tel-country-code"] {
+    width: 5ch;
+}
+
+input:user-invalid,
+select:user-invalid,
+textarea:user-invalid {
+    outline: 1px solid red;
+}
+
+button {
+    padding: .7em 1em;
+}
